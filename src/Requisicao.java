@@ -2,6 +2,8 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.FileInputStream;
+import java.util.Properties;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -12,7 +14,11 @@ import java.util.Scanner;
 public class Requisicao {
 
     static public ExchangeApi req(String cod) throws IOException, InterruptedException {
-        String url = "https://v6.exchangerate-api.com/v6/71581e54d0e320288b5723f8/latest/" + cod;
+        Properties props = new Properties();
+        props.load(new FileInputStream("config.properties"));
+        String apiKey = props.getProperty("api_key");
+
+        String url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/" + cod;
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
