@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 public class Moeda {
     private String codigoMoedaBase;
     private String codigoMoedaSolicitada;
@@ -5,12 +7,21 @@ public class Moeda {
     private Double valorInformado;
     private Double valorConvertido;
 
-    public Moeda(ExchangeApi exchangeApi, String codSolicitado, Double valorInformado){
+    public Moeda(ExchangeApi exchangeApi, String codSolicitado, Double valorInformado) throws ConversaoInvalidaException {
         this.codigoMoedaBase = exchangeApi.baseCode();
         this.codigoMoedaSolicitada = codSolicitado;
-
         this.valorInformado = valorInformado;
+
+        if (exchangeApi.conversionRates() == null) {
+            throw new ConversaoInvalidaException("Moeda Base não é válida.");
+        }
+
         this.valorMoedaSolicitada = exchangeApi.conversionRates().get(codSolicitado);
+
+        if (this.valorMoedaSolicitada == null) {
+            throw new ConversaoInvalidaException("Moeda Alvo '" + codSolicitado + "' não é válida.");
+        }
+
         this.valorConvertido = getValorMoedaSolicitada() * getValorInformado();
     }
 
@@ -49,6 +60,6 @@ public class Moeda {
     @Override
     public String toString(){
         return
-                valorInformado + " " + codigoMoedaBase + " esta aproximadamente na cotacao de " + valorConvertido + " " + codigoMoedaSolicitada;
+                valorInformado + " " + codigoMoedaBase + " esta aproximadamente na cotacao de " + Math.round(valorConvertido * 100) / 100.0 + " " + codigoMoedaSolicitada + "\n";
     }
 }

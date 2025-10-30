@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, ConversaoInvalidaException {
         Scanner sc = new Scanner(System.in);
         String opcao;
         do {
