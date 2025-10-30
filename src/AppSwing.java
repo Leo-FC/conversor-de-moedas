@@ -71,7 +71,6 @@ public class AppSwing {
                     String moedaAlvo = comboMoedaAlvo.getSelectedItem().toString().toUpperCase();
                     Double valor = Double.parseDouble(campoValor.getText());
 
-                    // A lógica de requisição e tratamento de erro continua a mesma
                     ExchangeApi requisicao = Requisicao.req(moedaBase);
                     Moeda moedaConvertida = new Moeda(requisicao, moedaAlvo, valor);
 

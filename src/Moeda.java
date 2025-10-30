@@ -60,6 +60,6 @@ public class Moeda {
     @Override
     public String toString(){
         return
-                valorInformado + " " + codigoMoedaBase + " esta aproximadamente na cotacao de " + Math.round(valorConvertido * 100) / 100.0 + " " + codigoMoedaSolicitada + "\n";
+                valorInformado + " " + codigoMoedaBase + " está aproximadamente na cotação de " + Math.round(valorConvertido * 100) / 100.0 + " " + codigoMoedaSolicitada + "\n";
     }
 }
